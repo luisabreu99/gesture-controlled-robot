@@ -27,7 +27,7 @@ O projeto foi desenvolvido para correr numa Raspberry Pi e permite controlar mot
 | Gesto | Função |
 |---|---|
 | Palma aberta | PARAR |
-| Fechar mão | AVANÇAR |
+| Fechar mão e abrir | AVANÇAR |
 | Indicador esquerda | VIRAR ESQUERDA |
 | Indicador direita | VIRAR DIREITA |
 
