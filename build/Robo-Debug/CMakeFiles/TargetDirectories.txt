@@ -1,0 +1,3 @@
+/home/abreu/Projetos/robo/build/Robo-Debug/CMakeFiles/robo.dir
+/home/abreu/Projetos/robo/build/Robo-Debug/CMakeFiles/edit_cache.dir
+/home/abreu/Projetos/robo/build/Robo-Debug/CMakeFiles/rebuild_cache.dir

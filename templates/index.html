@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html lang="pt">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ROBO CONTROL SYSTEM</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/style.css"
+    >
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+        <div class="logo">
+
+            <h1>
+                ROBO
+                <span>CONTROL SYSTEM</span>
+            </h1>
+
+            <p>
+                DUAL CAMERA • REAL-TIME • TELEMETRY
+            </p>
+
+        </div>
+
+        <div class="menu">
+
+            <div class="menu-item active">
+                DASHBOARD
+            </div>
+
+
+
+        </div>
+
+        <div class="robot-status">
+
+            <h2>ESTADO DO ROBÔ</h2>
+
+            <div class="status-line">
+                SISTEMA
+                <span>OK</span>
+            </div>
+
+            <div class="status-line">
+                MOTORES
+                <span>OK</span>
+            </div>
+
+            <div class="status-line">
+                CÂMERAS
+                <span>OK</span>
+            </div>
+
+            <div class="status-line">
+                SENSORES
+                <span>OK</span>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- MAIN -->
+
+    <div class="main">
+
+        <!-- TOP -->
+
+        <div class="topbar">
+
+            <div class="top-card">
+                CONECTADO
+                <small>{{ ip }}</small>
+            </div>
+
+            <div class="top-card">
+                MODO
+                <small>AUTÓNOMO</small>
+            </div>
+
+            <div class="top-card">
+                UPTIME
+                <small id="uptime"></small>
+            </div>
+
+            <div class="top-card">
+                DATA
+                <small id="date"></small>
+            </div>
+
+        </div>
+
+        <!-- CAMERAS -->
+
+        <div class="camera-grid">
+
+            <div class="camera-card">
+
+                <div class="camera-title">
+                    CÂMERA FRONTAL 1
+                </div>
+
+                <img src="/video">
+
+            </div>
+
+            <div class="camera-card">
+
+                <div class="camera-title">
+                    CÂMERA FRONTAL 2
+                </div>
+
+                <img
+                    src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200"
+                >
+
+            </div>
+
+        </div>
+
+        <!-- STATS -->
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+                <h3>VELOCIDADE</h3>
+                <div class="stat-value">
+                    2.45 m/s
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <h3>CORRENTE ATUAL</h3>
+                <div class="stat-value">
+                    1.82 A
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <h3>CORRENTE MÁXIMA</h3>
+                <div class="stat-value">
+                    5.00 A
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <h3>BATERIA</h3>
+                <div class="stat-value">
+                    76%
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- RIGHT -->
+
+    <div class="rightbar">
+
+        <div class="commands">
+
+            <button>AVANÇAR</button>
+            <button>ESQUERDA</button>
+            <button>DIREITA</button>
+            <button>PARAR</button>
+
+        </div>
+
+        <div class="gesture-box">
+
+            <h2>GESTO DETETADO</h2>
+
+            <div
+    class="gesture"
+    id="gesture-text"
+>
+
+    {{ gesture }}
+
+</div>
+
+        </div>
+
+    </div>
+
+</div>
+<script>
+
+async function updateGesture() {
+
+    try {
+
+        const response =
+            await fetch("/gesture")
+
+        const gesture =
+            await response.text()
+
+        document.getElementById(
+            "gesture-text"
+        ).innerText = gesture
+
+    } catch(err) {
+
+        console.log(err)
+    }
+}
+
+setInterval(
+    updateGesture,
+    500
+)
+
+
+
+function updateClock()
+{
+    const now = new Date()
+
+    const time =
+        now.toLocaleTimeString()
+
+    const date =
+        now.toLocaleDateString()
+
+    document.getElementById(
+        "uptime"
+    ).innerText = time
+
+    document.getElementById(
+        "date"
+    ).innerText = date
+}
+
+setInterval(
+    updateClock,
+    1000
+)
+
+updateClock()
+
+</script>
+</body>
+
+</html>
